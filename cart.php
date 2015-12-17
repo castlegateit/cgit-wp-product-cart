@@ -52,7 +52,8 @@ class Cart
     /**
      * Format currency
      */
-    public static function formatCurrency($num, $after = false, $sep = '') {
+    public static function formatCurrency($num, $after = false, $sep = '')
+    {
         $value = number_format($num, 2);
         $str = CGIT_PRODUCT_CURRENCY . $sep . $value;
 
