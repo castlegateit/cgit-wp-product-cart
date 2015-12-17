@@ -200,7 +200,7 @@ class Cart
      *
      * The output of each view can be modified using the cgit_cart_render_{name}
      * filter, where the name is the view filename without the extension. The
-     * second argument to this function includes the $cart array.
+     * second argument to this function includes the cart $contents array.
      */
     public function render($view)
     {
