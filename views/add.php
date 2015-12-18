@@ -4,7 +4,9 @@ if (!is_singular(CGIT_PRODUCT_POST_TYPE)) {
     return;
 }
 
-$product = cgit_product();
+global $post;
+
+$product = new Cgit\Product($post->ID);
 
 ?>
 <div class="cart-add">

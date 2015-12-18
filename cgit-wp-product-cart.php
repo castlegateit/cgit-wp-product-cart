@@ -33,13 +33,19 @@ register_activation_hook(__FILE__, function() {
 });
 
 /**
- * Includes
+ * Load plugin
+ *
+ * This uses the plugins_loaded action to control the order in which plugins are
+ * loaded. This plugin depends on the Product Catalogue, so must be loaded after
+ * that plugin.
  */
-include dirname(__FILE__) . '/cart.php';
-include dirname(__FILE__) . '/functions.php';
-include dirname(__FILE__) . '/widgets.php';
+add_action('plugins_loaded', function() {
 
-/**
- * Initialize cart
- */
-Cgit\Cart::getInstance();
+    // Includes
+    include dirname(__FILE__) . '/cart.php';
+    include dirname(__FILE__) . '/functions.php';
+    include dirname(__FILE__) . '/widgets.php';
+
+    // Initialization
+    Cgit\ProductCart::getInstance();
+}, 20);

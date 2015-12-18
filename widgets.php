@@ -5,7 +5,7 @@ namespace Cgit;
 /**
  * Cart contents widget
  */
-class CartContentsWidget extends \WP_Widget
+class ProductCartContentsWidget extends \WP_Widget
 {
 
     /**
@@ -24,7 +24,7 @@ class CartContentsWidget extends \WP_Widget
      */
     public function widget($args, $instance)
     {
-        $cart = cgit_cart();
+        $cart = ProductCart::getInstance();
 
         echo $args['before_widget'];
 
@@ -71,7 +71,7 @@ class CartContentsWidget extends \WP_Widget
 /**
  * Cart add widget
  */
-class CartAddWidget extends \WP_Widget
+class ProductCartAddWidget extends \WP_Widget
 {
 
     /**
@@ -96,7 +96,7 @@ class CartAddWidget extends \WP_Widget
             return;
         }
 
-        $cart = cgit_cart();
+        $cart = ProductCart::getInstance();
 
         echo $args['before_widget'];
 
@@ -144,6 +144,6 @@ class CartAddWidget extends \WP_Widget
  * Register widgets
  */
 add_action('widgets_init', function() {
-    register_widget('Cgit\CartContentsWidget');
-    register_widget('Cgit\CartAddWidget');
+    register_widget('Cgit\ProductCartContentsWidget');
+    register_widget('Cgit\ProductCartAddWidget');
 });

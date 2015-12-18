@@ -2,7 +2,13 @@
 
 namespace Cgit;
 
-class Cart
+/**
+ * Product cart
+ *
+ * The product cart extends the Cgit\ProductUtil class, which provides
+ * basic methods for rendering views and formatting currency values.
+ */
+class ProductCart extends ProductUtil
 {
 
     /**
@@ -33,6 +39,9 @@ class Cart
         // Start session to store cart contents
         session_start();
 
+        // Set view path
+        $this->viewPath = dirname(__FILE__) . '/views';
+
         // Modify cart in response to query parameters
         add_action('wp', array($this, 'update'));
     }
@@ -47,21 +56,6 @@ class Cart
         }
 
         return self::$instance;
-    }
-
-    /**
-     * Format currency
-     */
-    public static function formatCurrency($num, $after = false, $sep = '')
-    {
-        $value = number_format($num, 2);
-        $str = CGIT_PRODUCT_CURRENCY . $sep . $value;
-
-        if ($after) {
-            $str = $value . $sep . CGIT_PRODUCT_CURRENCY;
-        }
-
-        return $str;
     }
 
     /**
@@ -190,44 +184,5 @@ class Cart
         } else {
             $_SESSION['cart'][$key]['quantity'] -= $quantity;
         }
-    }
-
-    /**
-     * Render cart contents and forms
-     *
-     * Returns the compiled PHP output of a file within the views directory. If
-     * the file extension is missing, '.php' will be appended to the file name.
-     * The contents of the cart are available to the view files as $cart.
-     *
-     * The output of each view can be modified using the cgit_cart_render_{name}
-     * filter, where the name is the view filename without the extension. The
-     * second argument to this function includes the cart $contents array.
-     */
-    public function render($view)
-    {
-        if (substr($view, -4) != '.php') {
-            $view = $view . '.php';
-        }
-
-        $file = dirname(__FILE__) . '/views/' . $view;
-        $name = substr($view , 0, -4);
-        $filter = 'cgit_cart_render_' . $name;
-
-        // Make cart contents available to view file
-        $contents = $this->contents();
-
-        // Check view file exists
-        if (!file_exists($file)) {
-            return false;
-        }
-
-        ob_start();
-
-        include $file;
-
-        $output = ob_get_clean();
-        $output = apply_filters($filter, $output, $contents);
-
-        return $output;
     }
 }

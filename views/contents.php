@@ -1,5 +1,8 @@
 <?php
 
+$cart = Cgit\ProductCart::getInstance();
+$contents = $cart->contents();
+
 if (count($contents) == 0) {
     include 'empty.php';
     return;
@@ -11,7 +14,7 @@ $total = 0;
 $discount = 0;
 
 foreach ($contents as $item) {
-    $product = cgit_product($item['product']);
+    $product = new Cgit\Product($item['product']);
 
     // Product information
     $output = array(
@@ -64,17 +67,17 @@ usort($products, function($a, $b) {
                     </form>
                 </td>
                 <td><?= $product['quantity'] ?></td>
-                <td><?= Cgit\Cart::formatCurrency($product['price']) ?></td>
+                <td><?= $cart::formatCurrency($product['price']) ?></td>
             </tr>
         <?php endforeach; ?>
         <tr>
             <td colspan="2">Total</td>
-            <td><?= Cgit\Cart::formatCurrency($total) ?></td>
+            <td><?= $cart::formatCurrency($total) ?></td>
         </tr>
         <?php if ($discount): ?>
             <tr>
                 <td colspan="2">Total discount</td>
-                <td><?= Cgit\Cart::formatCurrency($discount) ?></td>
+                <td><?= $cart::formatCurrency($discount) ?></td>
             </tr>
         <?php endif; ?>
     </table>
