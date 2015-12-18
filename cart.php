@@ -178,7 +178,7 @@ class ProductCart extends ProductUtil
 
         if (
             $quantity === false ||
-            $quantity > $_SESSION['cart'][$key]['quantity']
+            $quantity >= $_SESSION['cart'][$key]['quantity']
         ) {
             unset($_SESSION['cart'][$key]);
         } else {
