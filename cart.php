@@ -39,6 +39,10 @@ class ProductCart extends ProductUtil
         // Start session to store cart contents
         session_start();
 
+        if (!isset($_SESSION['cart'])) {
+            $_SESSION['cart'] = array();
+        }
+
         // Set view path
         $this->viewPath = dirname(__FILE__) . '/views';
 
@@ -59,16 +63,6 @@ class ProductCart extends ProductUtil
     }
 
     /**
-     * Make sure cart is available in session
-     */
-    public function create()
-    {
-        if (!isset($_SESSION['cart'])) {
-            $_SESSION['cart'] = array();
-        }
-    }
-
-    /**
      * Update cart contents
      *
      * Checks that the cart array is available in the session variable and adds
@@ -77,8 +71,6 @@ class ProductCart extends ProductUtil
      */
     public function update()
     {
-        $this->create();
-
         // Assign POST data to variables
         foreach (self::$cartVars as $var) {
             $name = str_replace('cart_', '', $var);
@@ -115,7 +107,6 @@ class ProductCart extends ProductUtil
      */
     public function contents()
     {
-        $this->create();
         return $_SESSION['cart'];
     }
 
