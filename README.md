@@ -11,11 +11,11 @@ The plugin provides two widgets: Cart Contents and Add to Cart. The Add to Cart 
 The plugin provides a single function `cgit_product_cart()`, which retrieves the cart object. The object uses a singleton pattern, which means it can only have one instance.
 
     $cart = cgit_product_cart();
-    $cart = Cgit\ProductCart::getInstance(); // same as above
+    $cart = Cgit\Products\Cart::getInstance(); // same as above
 
 ## Methods ##
 
-The `Cgit\ProductCart` object provides various methods:
+The `Cgit\Products\Cart` object provides various methods:
 
 *   `$cart->render($view)` returns the compiled output of a PHP file from the `views` directory within the plugin. There are two views: `contents` and `add`, which are used by the widgets to render content.
 

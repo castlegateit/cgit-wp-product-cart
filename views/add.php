@@ -1,12 +1,14 @@
 <?php
 
+use Cgit\Products\Product;
+
 if (!is_singular(CGIT_PRODUCT_POST_TYPE)) {
     return;
 }
 
 global $post;
 
-$product = new Cgit\Product($post->ID);
+$product = new Product($post->ID);
 
 ?>
 <div class="cart-add">

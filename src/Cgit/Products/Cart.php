@@ -1,14 +1,14 @@
 <?php
 
-namespace Cgit;
+namespace Cgit\Products;
 
 /**
  * Product cart
  *
- * The product cart extends the Cgit\ProductUtil class, which provides
+ * The product cart extends the Cgit\Products\Utilities class, which provides
  * basic methods for rendering views and formatting currency values.
  */
-class ProductCart extends ProductUtil
+class Cart extends Utilities
 {
 
     /**
@@ -44,10 +44,13 @@ class ProductCart extends ProductUtil
         }
 
         // Set view path
-        $this->viewPath = dirname(__FILE__) . '/views';
+        $this->viewPath = self::pluginDir(__FILE__) . '/views';
 
         // Modify cart in response to query parameters
         add_action('wp', array($this, 'update'));
+
+        // Register widgets
+        add_action('widgets_init', [$this, 'registerWidgets']);
     }
 
     /**
@@ -175,5 +178,14 @@ class ProductCart extends ProductUtil
         } else {
             $_SESSION['cart'][$key]['quantity'] -= $quantity;
         }
+    }
+
+    /**
+     * Register widgets
+     */
+    public function registerWidgets()
+    {
+        register_widget('Cgit\Products\CartContentsWidget');
+        register_widget('Cgit\Products\CartAddWidget');
     }
 }

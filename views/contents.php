@@ -1,6 +1,9 @@
 <?php
 
-$cart = Cgit\ProductCart::getInstance();
+use Cgit\Products\Cart;
+use Cgit\Products\Product;
+
+$cart = Cart::getInstance();
 $contents = $cart->contents();
 
 if (count($contents) == 0) {
@@ -14,7 +17,7 @@ $total = 0;
 $discount = 0;
 
 foreach ($contents as $item) {
-    $product = new Cgit\Product($item['product']);
+    $product = new Product($item['product']);
 
     // Product information
     $output = array(
