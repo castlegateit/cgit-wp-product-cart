@@ -66,7 +66,7 @@ class CartAddWidget extends \WP_Widget
      */
     public function update($new_instance, $old_instance)
     {
-        $instance = array();
+        $instance = [];
         $instance['title'] = (!empty($new_instance['title'])) ?
             strip_tags($new_instance['title']) : '';
 

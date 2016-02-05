@@ -12,7 +12,7 @@ if (count($contents) == 0) {
 }
 
 // Initial values
-$products = array();
+$products = [];
 $total = 0;
 $discount = 0;
 
@@ -20,14 +20,14 @@ foreach ($contents as $item) {
     $product = new Product($item['product']);
 
     // Product information
-    $output = array(
+    $output = [
         'id' => $product->ID,
         'name' => $product->post_title,
         'url' => get_permalink($product->ID),
         'quantity' => $item['quantity'],
         'price' => $product->product_price * $item['quantity'],
         'original' => $product->product_price_original * $item['quantity'],
-    );
+    ];
 
     // Increment total price and discount
     $total += $output['price'];

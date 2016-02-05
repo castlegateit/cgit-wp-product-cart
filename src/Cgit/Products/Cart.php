@@ -22,12 +22,12 @@ class Cart extends Utilities
      * These are the array keys used in POST request when adding or removing
      * products from the cart.
      */
-    private static $cartVars = array(
+    private static $cartVars = [
         'cart_action',
         'cart_product',
         'cart_quantity',
         'cart_variant',
-    );
+    ];
 
     /**
      * Constructor
@@ -40,14 +40,14 @@ class Cart extends Utilities
         session_start();
 
         if (!isset($_SESSION['cart'])) {
-            $_SESSION['cart'] = array();
+            $_SESSION['cart'] = [];
         }
 
         // Set view path
         $this->viewPath = self::pluginDir(__FILE__) . '/views';
 
         // Modify cart in response to query parameters
-        add_action('wp', array($this, 'update'));
+        add_action('wp', [$this, 'update']);
 
         // Register widgets
         add_action('widgets_init', [$this, 'registerWidgets']);
@@ -94,7 +94,7 @@ class Cart extends Utilities
             $is_product = $obj->post_type == CGIT_PRODUCT_POST_TYPE;
         }
 
-        $permitted = array('add', 'remove');
+        $permitted = ['add', 'remove'];
         $is_permitted = in_array($action, $permitted);
 
         if (!$is_product || !$is_permitted) {
@@ -146,11 +146,11 @@ class Cart extends Utilities
         $key = $this->itemKey($product, $variant);
 
         if ($key === false) {
-            $_SESSION['cart'][] = array(
+            $_SESSION['cart'][] = [
                 'product' => $product,
                 'quantity' => $quantity,
                 'variant' => $variant,
-            );
+            ];
         } else {
             $_SESSION['cart'][$key]['quantity'] += $quantity;
         }
