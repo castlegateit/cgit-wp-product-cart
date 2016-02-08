@@ -3,7 +3,7 @@
 /**
  * ACF and Product Catalogue are required
  */
-register_activation_hook(__FILE__, function() {
+register_activation_hook($plugin_file, function() {
     if (
         !function_exists('acf_add_local_field_group') ||
         !function_exists('cgit_product')

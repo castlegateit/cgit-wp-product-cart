@@ -14,6 +14,11 @@ License: MIT
 
 use Cgit\Products\Cart;
 
+$plugin_file = __FILE__;
+
+require __DIR__ . '/src/autoload.php';
+require __DIR__ . '/activation.php';
+
 /**
  * Load plugin
  *
@@ -22,8 +27,6 @@ use Cgit\Products\Cart;
  * that plugin.
  */
 add_action('plugins_loaded', function() {
-    require __DIR__ . '/src/autoload.php';
-    require __DIR__ . '/activation.php';
     require __DIR__ . '/functions.php';
 
     // Initialization
