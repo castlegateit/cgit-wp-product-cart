@@ -185,7 +185,7 @@ class Cart extends Utilities
      */
     public function registerWidgets()
     {
-        register_widget('Cgit\Products\CartContentsWidget');
-        register_widget('Cgit\Products\CartAddWidget');
+        register_widget('Cgit\Products\Widgets\CartContents');
+        register_widget('Cgit\Products\Widgets\CartAdd');
     }
 }

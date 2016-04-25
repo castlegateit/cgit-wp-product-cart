@@ -10,8 +10,10 @@ The plugin provides two widgets: Cart Contents and Add to Cart. The Add to Cart 
 
 The plugin provides a single function `cgit_product_cart()`, which retrieves the cart object. The object uses a singleton pattern, which means it can only have one instance.
 
-    $cart = cgit_product_cart();
-    $cart = Cgit\Products\Cart::getInstance(); // same as above
+~~~ php
+$cart = cgit_product_cart();
+$cart = Cgit\Products\Cart::getInstance(); // same as above
+~~~
 
 ## Methods ##
 
@@ -33,20 +35,22 @@ The `Cgit\Products\Cart` object provides various methods:
 
 The cart contents are stored as an array in `$_SESSION['cart']`. A cart might something like:
 
-    $_SESSION = array(
-        'cart' => array(
-            array(
-                'product' => 7, // product ID
-                'quantity' => 2, // quantity
-                'variant' => 3 // variant index from repeater field
-            ),
-            array(
-                'product' => 4,
-                'quantity' => 1,
-                'variant' => false // this product does not have variants
-            )
+~~~ php
+$_SESSION = array(
+    'cart' => array(
+        array(
+            'product' => 7, // product ID
+            'quantity' => 2, // quantity
+            'variant' => 3 // variant index from repeater field
+        ),
+        array(
+            'product' => 4,
+            'quantity' => 1,
+            'variant' => false // this product does not have variants
         )
-    );
+    )
+);
+~~~
 
 ## Filters ##
 
